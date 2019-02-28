@@ -1,7 +1,7 @@
 {
   "name": "kk-dash-board",
   "description": "dataBoard base on gauge.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "chenkongming <337142363@qq.com>",
   "license": "MIT",
   "private": false,

@@ -58,7 +58,7 @@ export default {
       default:()=>{}
     }
   },
-  mounted(){
+  created(){
     console.log(Gauge)
    setTimeout(()=>{
      let target = document.getElementById('dashBoard'); // your canvas element
