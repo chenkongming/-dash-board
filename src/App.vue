@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <canvas  id="dashBoard" :style="style"></canvas>
+    <canvas  id="dashBoard" :style="styleObj"></canvas>
     <div id="preview-textfield"></div>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
   import "./gauge/assets/prettify.js";
   import "./gauge/assets/fd-slider/fd-slider.js";
+  import Gauge from 'Gauge'
 export default {
   name: 'data-board',
   data () {
@@ -51,16 +52,17 @@ export default {
       required:true,
       default:50
     },
-    style:{
+    styleObj:{
       type:Object,
       required:false,
       default:()=>{}
     }
   },
   mounted(){
+    console.log(Gauge)
    setTimeout(()=>{
      let target = document.getElementById('dashBoard'); // your canvas element
-     let gauge = new Gauge(target).setOptions(this.opts); // create sexy gauge!
+     let gauge = new Gauge.Gauge(target).setOptions(this.opts); // create sexy gauge!
      gauge.maxValue = this.maxValue; // set max gauge value
      gauge.animationSpeed = this.animationSpeed; // set animation speed (32 is default value)
      gauge.set(this.actualValue); // set actual value

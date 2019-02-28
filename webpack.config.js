@@ -73,9 +73,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
     },
     extensions: ['*', '.js', '.vue', '.json']
+  },
+  externals:{
+    "Gauge":"./src/gauge/dist/gauge.js"
   },
   devServer: {
     historyApiFallback: true,

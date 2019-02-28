@@ -1,7 +1,11 @@
-本插件是对于gauge.js的基本封装
+
+
+    本插件是对于gauge.js的基本封装
 https://github.com/bernii/gauge.js
 
+
 参数
+
 
 opts 请参照官网opts
 maxValue  设置最大值 type:number required:true default:100
@@ -9,13 +13,16 @@ animationSpeed 指针动画速度 type:number required:false default:32
 actualValue  当前值 type:number required:true default:50
 style canvas的样式，参照vue style的设置
 
+
 注意：
 1）官方gauge的圆形仪表盘不是圆形的，这里我修改了源码，标注①
- this.ctx.lineCap = "round";
+this.ctx.lineCap = "round";
+
 
 2）官方gauge的圆形仪表盘绘画方式相反了，这里我修改了源码②、③
 
- Gauge.prototype.render = function() {
+
+Gauge.prototype.render = function() {
       var displayedAngle, fillStyle, gauge, h, j, k, len, len1, max, min, radius, ref, ref1, scaleMutate, tmpRadius, w, zone;
       w = this.canvas.width / 2;
       h = (this.canvas.height * this.paddingTop + this.availableHeight) - ((this.radius + this.lineWidth / 2) * this.extraPadding);
@@ -94,5 +101,9 @@ style canvas的样式，参照vue style的设置
       }
       return this.ctx.translate(-w, -h);
     };
+
+
+
+
 
 
