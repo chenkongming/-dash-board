@@ -1,60 +1,77 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <canvas  id="dashBoard" :style="style"></canvas>
+    <div id="preview-textfield"></div>
   </div>
 </template>
 
 <script>
+  import "./gauge/assets/prettify.js";
+  import "./gauge/assets/fd-slider/fd-slider.js";
 export default {
-  name: 'app',
+  name: 'data-board',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
+  },
+  props:{
+    opts:{
+      type:Object,
+      default:()=>{
+        return{
+          gradientType: 1,
+          lines: 6, // The number of lines to draw
+          angle: 0, // The length of each line
+          lineWidth: 0.2, // The line thickness
+          pointer: {
+            length: 0.25, // The radius of the inner circle
+            strokeWidth: 0.085, // The rotation offset
+            color: '#FA803E' // Fill colorEF9050
+          },
+          limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+          colorStart: '#F6BB5D',   // Colors
+          colorStop: '#FA803E',    // just experiment with them
+          strokeColor: '#213272',   // to see which ones work best for you
+          generateGradient: true
+        }
+      }
+    },
+    maxValue:{
+      type: Number,
+      required:true,
+      default:100
+    },
+    animationSpeed:{
+      type: Number,
+      required:false,
+      default:32
+    },
+    actualValue:{
+      type: Number,
+      required:true,
+      default:50
+    },
+    style:{
+      type:Object,
+      required:false,
+      default:()=>{}
+    }
+  },
+  mounted(){
+   setTimeout(()=>{
+     let target = document.getElementById('dashBoard'); // your canvas element
+     let gauge = new Gauge(target).setOptions(this.opts); // create sexy gauge!
+     gauge.maxValue = this.maxValue; // set max gauge value
+     gauge.animationSpeed = this.animationSpeed; // set animation speed (32 is default value)
+     gauge.set(this.actualValue); // set actual value
+   },0)
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style  scoped>
+@import "gauge/assets/main.css";
+@import "gauge/assets/prettify.css";
+@import "gauge/assets/fd-slider/fd-slider.css";
+@import "gauge/assets/fd-slider/fd-slider-tooltip.css";
 </style>

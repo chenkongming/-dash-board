@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'helloMsg.min.js',
+    filename: 'build.js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
